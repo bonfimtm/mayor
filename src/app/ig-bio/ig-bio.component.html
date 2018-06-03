@@ -1,0 +1,14 @@
+<section id="bio">
+  <div class="row" *ngIf="bio">
+    <div class="col-xs-6 col-sm-4 col-md-2">
+      <img class="img-circle" [src]="bio.profile_picture">
+    </div>
+    <div class="col-xs-6 col-sm-8 col-md-10">
+      <h3>{{ bio.full_name }}</h3>
+      <small>{{ bio.bio }}</small>
+      <br>
+      <a href="{{ bio.website }}" target="_blank">{{ bio.website }}</a>
+      <p>Seguidores <span class="label label-info">{{ bio.counts.followed_by }}</span></p>
+    </div>
+  </div>
+</section>

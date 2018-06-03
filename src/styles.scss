@@ -1,0 +1,75 @@
+$nb_primary: rgb(162, 40, 68);
+$nb_grey_light: rgb(238, 238, 238);
+$nb_grey_dark: rgb(231, 231, 231);
+.typography {
+  font-family: "CrimsonText";
+}
+
+@font-face {
+  font-family: CrimsonText;
+  src: local("CrimsonText"), url(assets/fonts/CrimsonText-Regular.ttf);
+}
+
+body {
+  margin-top: 75px;
+  font-family: CrimsonText;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: CrimsonText, serif;
+}
+
+a,
+a:hover {
+  color: $nb_primary;
+}
+
+.btn-primary,
+.btn-primary:hover {
+  background-color: $nb_primary;
+  border-color: $nb_primary;
+}
+
+.nb-separator,
+.nb-separator-break {
+  height: 4px;
+  transform: skew(50deg);
+  -webkit-transform: skew(50deg);
+  -moz-transform: skew(50deg);
+  -o-transform: skew(50deg);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.img-thumb {
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+}
+
+.img-thumb.cover {
+  background-size: cover;
+}
+
+.img-thumb.contain {
+  background-size: contain;
+}
+
+.nb-separator {
+  width: 200px;
+  background: $nb_primary;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.nb-separator-break {
+  width: 4px;
+  background-color: white;
+  position: relative;
+  top: -4px;
+}

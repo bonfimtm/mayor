@@ -1,0 +1,29 @@
+<section id="perguntas-frequentes" class="mb-5">
+
+  <div class="container">
+    <h1 class="display-4 text-center">Perguntas Frequentes</h1>
+    <div class="nb-separator"></div>
+
+    <div class="row mt-4" *ngFor="let sec of faq">
+      <div class="col">
+        <h2 [innerText]="sec.title"></h2>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item list-group-item-action" *ngFor="let item of sec.content">
+            <a class="faq-toggle" *ngIf="item.show" (click)="item.show = false">
+              <i class="fa fa-minus-square"></i>
+            </a>
+            <a class="faq-toggle" *ngIf="!item.show" (click)="item.show = true">
+              <i class="fa fa-plus-square"></i>
+            </a>
+            <a class="faq-toggle" [innerText]="item.question" (click)="item.show = !item.show"></a>
+            <p [style.display]="item.show ? 'block' : 'none'">
+              <br>
+              <span [innerHtml]="item.answer"></span>
+            </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
