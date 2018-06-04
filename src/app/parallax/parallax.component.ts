@@ -25,7 +25,7 @@ export class ParallaxComponent implements OnInit {
 
   updateScrollLinkVisibility() {
     const verticalOffset = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    if (verticalOffset < 100) {
+    if (verticalOffset < 85) {
       this.showScrollLink = true;
     } else {
       this.showScrollLink = false;

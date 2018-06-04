@@ -1,5 +1,5 @@
 .scroll-down-link {
-    position: absolute;
+    position: fixed;
 	bottom: 0%;
     left: 0%;
     right: 0%;
@@ -14,13 +14,15 @@
     color: white;
 }
 
+/* mobile */
 .parallax-bg {
-    background-image: url(/assets/hero-lg.png);
+    background-image: url(/assets/hero-xs.png);
 }
 
-@media screen and (max-width: 767px) {
+/* tablet and desktop */
+@media screen and (min-width: 767px) {
     .parallax-bg {
-        background-image: url(/assets/hero-xs.png);
+        background-image: url(/assets/hero-lg.png);
     }
 }
 
@@ -46,15 +48,26 @@
 
 .parallax {
     background-attachment: scroll;
-    background-position: center top;
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
 }
 
+/* mobile */
+.parallax {
+    background-position: center -76px;
+}
+
+/* tablet and desktop */
+@media screen and (min-width: 767px) {
+	.parallax {
+        background-position: center center;
+	}
+}
+
+/* desktop */
 @media screen and (min-width: 1025px) {
 	.parallax {
-        /* Create the parallax scrolling effect */
-        background-attachment: fixed;
+        background-attachment: fixed;  /* parallax scrolling effect */
 	}
 }
