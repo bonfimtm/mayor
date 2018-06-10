@@ -1,6 +1,6 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#appNavbar" aria-controls="appNavbar"
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -9,31 +9,31 @@
     <img src="assets/logo-sm.png" style="width: 50px; height: 50px">
   </a>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <div class="collapse navbar-collapse" id="appNavbar">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link smooth-scroll" href="#inicio">
+        <a class="nav-link smooth-scroll" href="#inicio" (click)="collapse()">
           Início
           <span class="sr-only">(current)</span>
         </a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link smooth-scroll" href="#sobre">
+        <a class="nav-link smooth-scroll" href="#sobre" (click)="collapse()">
           Sobre
         </a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link smooth-scroll" href="#entrevistas">
+        <a class="nav-link smooth-scroll" href="#entrevistas" (click)="collapse()">
           Entrevistas
         </a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link smooth-scroll" href="#perguntas-frequentes">
+        <a class="nav-link smooth-scroll" href="#perguntas-frequentes" (click)="collapse()">
           Perguntas Frequentes
         </a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link smooth-scroll" href="#contato">
+        <a class="nav-link smooth-scroll" href="#contato" (click)="collapse()">
           Contato
         </a>
       </li>
