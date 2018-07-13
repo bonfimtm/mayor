@@ -18,6 +18,7 @@ import { IgService } from './ig.service';
 import { MailService } from './mail.service';
 import { AboutComponent } from './about/about.component';
 import { FooterComponent } from './footer/footer.component';
+import { CarouselComponent } from './carousel/carousel.component';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { FooterComponent } from './footer/footer.component';
     IgFeedComponent,
     AboutComponent,
     FooterComponent,
+    CarouselComponent,
   ],
   imports: [
     BrowserModule,
