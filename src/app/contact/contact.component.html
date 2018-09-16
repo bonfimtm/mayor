@@ -148,12 +148,12 @@
               </div>
 
               <div class="form-group">
-                <textarea class="form-control" name="Message" required maxlength="10000" placeholder="Mensagem" rows="6" [(ngModel)]="message"
-                  #textareaMessage="ngModel"></textarea>
-                <div *ngIf="textareaMessage.invalid && (formContact.submitted || textareaMessage.dirty || textareaMessage.touched)">
+                <textarea class="form-control" name="Content" required maxlength="10000" placeholder="Mensagem" rows="6" [(ngModel)]="content"
+                  #textareaContent="ngModel"></textarea>
+                <div *ngIf="textareaContent.invalid && (formContact.submitted || textareaContent.dirty || textareaContent.touched)">
                   <br>
                   <div class="alert alert-warning">
-                    <div *ngIf="textareaMessage.errors.required">
+                    <div *ngIf="textareaContent.errors.required">
                       O campo Mensagem é obrigatório
                     </div>
                   </div>

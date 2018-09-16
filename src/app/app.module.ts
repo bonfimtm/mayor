@@ -1,7 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule, JsonpModule } from '@angular/http';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireFunctionsModule } from '@angular/fire/functions';
+
+import { environment } from '../environments/environment';
 
 /* Components */
 import { AppComponent } from './app.component';
@@ -10,12 +13,9 @@ import { InterviewsComponent } from './interviews/interviews.component';
 import { FaqComponent } from './faq/faq.component';
 import { ContactComponent } from './contact/contact.component';
 import { ParallaxComponent } from './parallax/parallax.component';
-import { IgBioComponent } from './ig-bio/ig-bio.component';
-import { IgFeedComponent } from './ig-feed/ig-feed.component';
 
 /* Services */
-import { IgService } from './ig.service';
-import { MailService } from './mail.service';
+import { ContactService } from './contact.service';
 import { AboutComponent } from './about/about.component';
 import { FooterComponent } from './footer/footer.component';
 import { CarouselComponent } from './carousel/carousel.component';
@@ -29,8 +29,6 @@ import { CarouselComponent } from './carousel/carousel.component';
     FaqComponent,
     ContactComponent,
     ParallaxComponent,
-    IgBioComponent,
-    IgFeedComponent,
     AboutComponent,
     FooterComponent,
     CarouselComponent,
@@ -38,12 +36,11 @@ import { CarouselComponent } from './carousel/carousel.component';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
-    JsonpModule
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireFunctionsModule,
   ],
   providers: [
-    IgService,
-    MailService,
+    ContactService,
   ],
   bootstrap: [AppComponent]
 })

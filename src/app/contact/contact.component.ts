@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { MailService } from '../mail.service';
+import { ContactService } from '../contact.service';
+
+enum Status {
+  NoAction = 0,
+  Success = 1,
+  Error = 2,
+}
 
 @Component({
   selector: 'app-contact',
@@ -11,17 +17,11 @@ export class ContactComponent implements OnInit {
   name: string;
   email: string;
   subject: string;
-  message: string;
-
-  /*
-    0 - No action
-    1 - Success
-    2 - Error
-  */
-  status = 0;
+  content: string;
+  status: Status = Status.NoAction;
   loading = false;
 
-  constructor(private mailService: MailService) {
+  constructor(private mailService: ContactService) {
   }
 
   ngOnInit() {
@@ -31,24 +31,24 @@ export class ContactComponent implements OnInit {
     console.log(contactForm);
     if (contactForm.valid) {
       this.loading = true;
-      this.mailService.makeContact(this.name, this.email, this.subject, this.message)
+      this.mailService.makeContact(this.name, this.email, this.subject, this.content)
         .subscribe(data => {
           console.log('data', data);
           const res: any = data;
 
-          if (res.result) {
+          if (res.success) {
+
+            this.status = Status.Success;
 
             this.name = '';
             this.email = '';
             this.subject = '';
-            this.message = '';
-
-            this.status = 1;
+            this.content = '';
 
             contactForm.resetForm();
 
           } else {
-            this.status = 2;
+            this.status = Status.Error;
           }
 
         }, null, () => {
