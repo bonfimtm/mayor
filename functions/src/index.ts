@@ -18,6 +18,7 @@ function saveMessage({ name, email, subject, content }): Promise<any> {
         email: email,
         subject: subject,
         content: content,
+        createdAt: new Date(),
     }).then(() => {
         console.log('New contact message saved');
         return {
