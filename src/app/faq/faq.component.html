@@ -15,6 +15,7 @@
             <a class="faq-toggle" *ngIf="!item.show" (click)="item.show = true">
               <i class="fa fa-plus-square"></i>
             </a>
+            &nbsp;
             <a class="faq-toggle" [innerText]="item.question" (click)="item.show = !item.show"></a>
             <p [style.display]="item.show ? 'block' : 'none'">
               <br>
