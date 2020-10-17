@@ -1,51 +1,86 @@
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
+import { createTransport } from 'nodemailer';
+
+interface ContactMessage {
+    name: string,
+    email: string,
+    subject: string,
+    content: string,
+};
+
+// Configure the email transport using the default SMTP transport and a GMail account.
+const gmailEmail = functions.config().gmail.email;
+const gmailPassword = functions.config().gmail.password;
+const mailTransport = createTransport({
+    service: 'gmail',
+    auth: {
+        user: gmailEmail,
+        pass: gmailPassword,
+    },
+});
+const recipients = functions.config().sitecontact.recipients;
 
 admin.initializeApp();
 
-function saveMessage({ name, email, subject, content }): Promise<any> {
+export const onCallSendContactMessage = functions.https.onCall(async (data: ContactMessage, _): Promise<any> => {
+    console.log('Contact message data', data);
+    return saveMessage(data)
+        .then(() => sendContactEmail(data))
+        .then(() => { return { success: true } })
+        .catch(() => { return { success: false } });
+});
+
+function saveMessage(visitorMessage: ContactMessage): Promise<any> {
+
+    const { name, email, subject, content } = visitorMessage;
 
     // The contact message text is required
-    if (!content) {
-        return Promise.resolve({
-            success: false,
-        });
+    if (!name || !email || !subject || !content) {
+        return Promise.reject("Missing required fields");
     }
 
     // Saving the new contact message
-    return admin.firestore().collection('/messages').add({
-        name: name,
-        email: email,
-        subject: subject,
-        content: content,
-        createdAt: new Date(),
-    }).then(() => {
-        console.log('New contact message saved');
-        return {
-            success: true,
-        };
-    });
+    return admin.firestore().collection('/messages')
+        .add({
+            name: name,
+            email: email,
+            subject: subject,
+            content: content,
+            createdAt: new Date(),
+        })
+        .then(() => console.log(`Message from ${name} (${email}) was saved`))
+        .catch((error: any) => console.error('There was an error while saving the message:', error));
 }
 
-export const onCallSendContactMessage = functions.https.onCall((data, _) => {
-    console.log('Contact message data', data);
-    return saveMessage(data);
-});
+// Sends contact message via email
+function sendContactEmail(visitorMessage: ContactMessage): Promise<any> {
 
-export const onRequestSendContactMessage = functions.https.onRequest((req, res) => {
+    const { name, email, subject, content } = visitorMessage;
 
-    console.log('Contact message request', req);
+    const emailMessage = {
+        from: '"neygutemberg.com.br" <noreply@firebase.com>',
+        to: recipients,
+        subject: 'Você recebeu uma mensagem pelo site :)',
+        text: `
+            A seguinte mensagem foi enviada através do seu web site.
 
-    // Check for POST request
-    if (req.method !== 'POST') {
-        res.status(400).send({
-            success: false,
-            debug: 'Please send a POST request',
-        });
-        return;
-    }
+            Nome:
+            ${name}
 
-    saveMessage(req.body)
-        .then(result => res.status(200).send(result))
-        .catch(error => console.error('Error saving message', error));
-});
+            E-mail:
+            ${email}
+
+            Assunto:
+            ${subject}
+
+            Mensagem:
+            ${content}
+
+      `.split('\n').map(line => line.trim()).join('\n'),
+    };
+
+    return mailTransport.sendMail(emailMessage)
+        .then(() => console.log(`Message from ${name} (${email}) was sent via email`))
+        .catch((error: any) => console.error('There was an error while sending the email:', error));
+};
