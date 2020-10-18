@@ -18,6 +18,7 @@ import { ParallaxComponent } from './parallax/parallax.component';
 import { AboutComponent } from './about/about.component';
 import { FooterComponent } from './footer/footer.component';
 import { CarouselComponent } from './carousel/carousel.component';
+import { ContactFormComponent } from './contact-form/contact-form.component';
 
 /* Services */
 import { ContactService } from './contact.service';
@@ -38,6 +39,7 @@ const appRoutes: Routes = [
     AboutComponent,
     FooterComponent,
     CarouselComponent,
+    ContactFormComponent,
   ],
   imports: [
     BrowserModule,
