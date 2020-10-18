@@ -9,6 +9,7 @@ import * as $ from 'jquery';
 })
 export class FooterComponent implements OnInit {
 
+  public currentYear = new Date().getFullYear();
   public showScrollLink = false;
 
   constructor() {
