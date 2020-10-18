@@ -31,9 +31,9 @@ export const onCallSendContactMessage = functions.https.onCall(async (data: Cont
         .catch(() => { return { success: false } });
 });
 
-function saveMessage(visitorMessage: ContactMessage): Promise<any> {
+function saveMessage(contactMessage: ContactMessage): Promise<any> {
 
-    const { name, email, subject, content } = visitorMessage;
+    const { name, email, subject, content } = contactMessage;
 
     // The contact message text is required
     if (!name || !email || !subject || !content) {
@@ -54,9 +54,9 @@ function saveMessage(visitorMessage: ContactMessage): Promise<any> {
 }
 
 // Sends contact message via email
-function sendContactEmail(visitorMessage: ContactMessage): Promise<any> {
+function sendContactEmail(contactMessage: ContactMessage): Promise<any> {
 
-    const { name, email, subject, content } = visitorMessage;
+    const { name, email, subject, content } = contactMessage;
 
     const emailMessage = {
         from: '"neygutemberg.com.br" <noreply@firebase.com>',
