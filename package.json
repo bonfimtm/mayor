@@ -5,7 +5,7 @@
   "repository": "https://github.com/bonfimtm/mayor.git",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --host=0.0.0.0 -o",
+    "start": "ng serve --host=0.0.0.0",
     "build": "ng build --prod",
     "lint": "ng lint",
     "cleanall": "rm -rf node_modules dist"
