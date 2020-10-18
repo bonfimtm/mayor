@@ -19,12 +19,14 @@ import { AboutComponent } from './about/about.component';
 import { FooterComponent } from './footer/footer.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
+import { TicketPageComponent } from './ticket-page/ticket-page.component';
 
 /* Services */
 import { ContactService } from './contact.service';
 
 const appRoutes: Routes = [
   { path: '', component: HomePageComponent },
+  { path: 'recorrer-infracoes-de-transito', component: TicketPageComponent },
 ];
 
 @NgModule({
@@ -40,6 +42,7 @@ const appRoutes: Routes = [
     FooterComponent,
     CarouselComponent,
     ContactFormComponent,
+    TicketPageComponent,
   ],
   imports: [
     BrowserModule,
