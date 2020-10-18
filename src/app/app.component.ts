@@ -12,7 +12,9 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
 
     function scrollSmoothly(target: string) {
-      $(target).each((idx, elm) => {
+      const segments = target.split('/');
+      const targetId = segments[segments.length - 1];
+      $(targetId).each((idx, elm) => {
         $('html, body').animate({
           scrollTop: elm.offsetTop - 76
         }, 500);
