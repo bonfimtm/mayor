@@ -7,6 +7,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { environment } from '../environments/environment';
 
+import { AppRoutingModule } from './app-routing.module';
+
 /* Components */
 import { HomePageComponent } from './home-page/home-page.component';
 import { AppComponent } from './app.component';
@@ -23,11 +25,6 @@ import { TicketPageComponent } from './ticket-page/ticket-page.component';
 
 /* Services */
 import { ContactService } from './contact.service';
-
-const appRoutes: Routes = [
-  { path: '', component: HomePageComponent },
-  { path: 'recorrer-infracoes-de-transito', component: TicketPageComponent },
-];
 
 @NgModule({
   declarations: [
@@ -49,7 +46,7 @@ const appRoutes: Routes = [
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireFunctionsModule,
-    RouterModule.forRoot(appRoutes),
+    AppRoutingModule,
   ],
   providers: [
     ContactService,

@@ -1,5 +1,14 @@
 {
+  "targets": {
+    "mayor-22a5a": {
+      "hosting": {
+        "mayor": [
+          "mayor-22a5a"
+        ]
+      }
+    }
+  },
   "projects": {
-    "default": "mayor-22a5a"
+    "mayor": "mayor-22a5a"
   }
 }
