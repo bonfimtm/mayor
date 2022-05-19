@@ -1,0 +1,11 @@
+#profilePicture {
+    height: 400px;
+}
+
+#profilePicture {
+    background-image: url(/assets/images/photo.webp);
+}
+
+.no-webp#profilePicture {
+    background-image: url(/assets/images/photo.jpg);
+}

@@ -16,13 +16,20 @@
 
 /* mobile */
 .parallax-bg {
-    background-image: url(/assets/hero-xs.png);
+    background-image: url(/assets/images/hero-xs.webp);
+}
+
+.no-webp.parallax-bg {
+    background-image: url(/assets/images/hero-xs.png);
 }
 
 /* tablet and desktop */
 @media screen and (min-width: 767px) {
     .parallax-bg {
-        background-image: url(/assets/hero-lg.png);
+        background-image: url(/assets/images/hero-lg.webp);
+    }
+    .no-webp.parallax-bg {
+        background-image: url(/assets/images/hero-lg.png);
     }
 }
 

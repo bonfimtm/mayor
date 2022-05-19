@@ -62,3 +62,6 @@ Thumbs.db
 ### Firebase Cloud Functions ###
 
 /functions/lib
+
+# converted images
+/src/assets/images/*.webp
