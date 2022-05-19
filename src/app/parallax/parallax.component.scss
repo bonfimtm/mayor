@@ -55,7 +55,7 @@
 
 /* mobile */
 .parallax {
-    background-position: center -76px;
+    background-position: center -20vh;
 }
 
 /* tablet and desktop */
@@ -66,7 +66,7 @@
 }
 
 /* desktop */
-@media screen and (min-width: 1025px) {
+@media screen and (min-width: 1440px) {
 	.parallax {
         background-attachment: fixed;  /* parallax scrolling effect */
 	}
