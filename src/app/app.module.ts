@@ -13,7 +13,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomePageComponent } from './home-page/home-page.component';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { InterviewsComponent } from './interviews/interviews.component';
 import { FaqComponent } from './faq/faq.component';
 import { ContactComponent } from './contact/contact.component';
 import { ParallaxComponent } from './parallax/parallax.component';
@@ -31,7 +30,6 @@ import { ContactService } from './contact.service';
     AppComponent,
     NavbarComponent,
     HomePageComponent,
-    InterviewsComponent,
     FaqComponent,
     ContactComponent,
     ParallaxComponent,
