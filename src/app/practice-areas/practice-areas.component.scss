@@ -1,0 +1,18 @@
+$nb_primary: rgb(162, 40, 68);
+
+.practice-tabs .nav-link {
+  cursor: pointer;
+  color: $nb_primary;
+  border-radius: 0;
+  border-left: 3px solid transparent;
+}
+
+.practice-tabs .nav-link:hover {
+  background-color: rgba($nb_primary, 0.08);
+}
+
+.practice-tabs .nav-link.active {
+  background-color: $nb_primary;
+  color: #fff;
+  border-left-color: $nb_primary;
+}

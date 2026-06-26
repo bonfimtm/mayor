@@ -1,0 +1,36 @@
+<section id="areas-de-atuacao" class="mb-5">
+
+  <div class="container">
+    <h1 class="display-4 text-center">Áreas de Atuação</h1>
+    <div class="nb-separator"></div>
+
+    <div class="row mt-4">
+      <div class="col-4 col-md-4 col-lg-3 mb-4">
+        <ul class="nav nav-pills flex-column practice-tabs" role="tablist">
+          <li class="nav-item" *ngFor="let area of areas; let i = index">
+            <a class="nav-link" [class.active]="selected === i" (click)="select(i)" [innerText]="area.title"></a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-8 col-md-8 col-lg-9">
+        <div class="tab-content" *ngFor="let area of areas; let i = index">
+          <div class="tab-pane" [class.active]="selected === i" [class.show]="selected === i"
+            [style.display]="selected === i ? 'block' : 'none'">
+            <h2 [innerText]="area.title"></h2>
+            <p class="lead text-muted" [innerText]="area.subtitle"></p>
+
+            <ng-container *ngFor="let block of area.blocks">
+              <p *ngIf="block.type === 'paragraph'" [innerText]="block.text"></p>
+              <h4 *ngIf="block.type === 'heading'" class="mt-3" [innerText]="block.text"></h4>
+              <ul *ngIf="block.type === 'list'">
+                <li *ngFor="let item of block.items" [innerText]="item"></li>
+              </ul>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
