@@ -1,0 +1,9 @@
+.carousel-item img {
+  max-height: 80vh;
+  object-fit: contain;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: grayscale(100%) brightness(0.6);
+}
