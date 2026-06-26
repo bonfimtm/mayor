@@ -35,7 +35,8 @@
               "src/manifest.json",
               "src/mstile-150x150.png",
               "src/safari-pinned-tab.svg",
-              "src/robots.txt"
+              "src/robots.txt",
+              "src/sitemap.xml"
             ],
             "styles": [
               "src/bootstrap.scss",
