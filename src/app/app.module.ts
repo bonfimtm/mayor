@@ -20,6 +20,7 @@ import { AboutComponent } from './about/about.component';
 import { FooterComponent } from './footer/footer.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { PracticeAreasComponent } from './practice-areas/practice-areas.component';
+import { HistoryComponent } from './history/history.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { TicketPageComponent } from './ticket-page/ticket-page.component';
 
@@ -38,6 +39,7 @@ import { ContactService } from './contact.service';
     FooterComponent,
     CarouselComponent,
     PracticeAreasComponent,
+    HistoryComponent,
     ContactFormComponent,
     TicketPageComponent,
   ],
