@@ -9,14 +9,16 @@
         <h2 [innerText]="sec.title"></h2>
         <ul class="list-group list-group-flush">
           <li class="list-group-item list-group-item-action" *ngFor="let item of sec.content">
-            <a class="faq-toggle" *ngIf="item.show" (click)="item.show = false">
+            <button type="button" class="faq-toggle" *ngIf="item.show" (click)="item.show = false"
+              aria-label="Recolher resposta">
               <i class="fa fa-minus-square"></i>
-            </a>
-            <a class="faq-toggle" *ngIf="!item.show" (click)="item.show = true">
+            </button>
+            <button type="button" class="faq-toggle" *ngIf="!item.show" (click)="item.show = true"
+              aria-label="Expandir resposta">
               <i class="fa fa-plus-square"></i>
-            </a>
+            </button>
             &nbsp;
-            <a class="faq-toggle" [innerText]="item.question" (click)="item.show = !item.show"></a>
+            <button type="button" class="faq-toggle" [innerText]="item.question" (click)="item.show = !item.show"></button>
             <p [style.display]="item.show ? 'block' : 'none'">
               <br>
               <span [innerHtml]="item.answer"></span>

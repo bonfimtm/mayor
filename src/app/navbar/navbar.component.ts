@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
-import * as $ from 'jquery';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
@@ -9,13 +8,18 @@ import * as $ from 'jquery';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(@Inject(PLATFORM_ID) private platformId: object) { }
 
   ngOnInit() {
   }
 
   collapse() {
-    $('#appNavbar').removeClass('show');
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+    import('jquery').then(({ default: $ }) => {
+      $('#appNavbar').removeClass('show');
+    });
   }
 
 }

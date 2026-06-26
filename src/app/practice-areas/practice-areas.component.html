@@ -8,7 +8,8 @@
       <div class="col-4 col-md-4 col-lg-3 mb-4">
         <ul class="nav nav-pills flex-column practice-tabs" role="tablist">
           <li class="nav-item" *ngFor="let area of areas; let i = index">
-            <a class="nav-link" [class.active]="selected === i" (click)="select(i)" [innerText]="area.title"></a>
+            <button type="button" class="nav-link" [class.active]="selected === i" (click)="select(i)"
+              [innerText]="area.title"></button>
           </li>
         </ul>
       </div>
