@@ -2,7 +2,7 @@
   "hosting": [
     {
       "target": "mayor",
-      "public": "dist/mayor/browser",
+      "public": "dist/mayor",
       "ignore": [
         "**/.*"
       ],

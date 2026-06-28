@@ -31,7 +31,7 @@ export class SeoService {
   ) {}
 
   update(data: SeoData): void {
-    const url = this.baseUrl + (data.path === '/' ? '/' : data.path);
+    const url = this.baseUrl + (data.path === '/' ? '' : data.path);
     const image = this.baseUrl + (data.image || this.defaultImage);
 
     this.title.setTitle(data.title);
