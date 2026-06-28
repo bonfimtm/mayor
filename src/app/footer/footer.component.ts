@@ -1,4 +1,5 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 import $ from 'jquery';
 
@@ -8,12 +9,15 @@ import $ from 'jquery';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent implements OnInit {
+  private platformId = inject(PLATFORM_ID);
 
   public currentYear = new Date().getFullYear();
   public showScrollLink = false;
 
   ngOnInit() {
-    this.updateScrollLinkVisibility();
+    if (isPlatformBrowser(this.platformId)) {
+      this.updateScrollLinkVisibility();
+    }
   }
 
   @HostListener('window:scroll', [])

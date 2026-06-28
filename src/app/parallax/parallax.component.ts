@@ -1,4 +1,5 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 import $ from 'jquery';
 
@@ -8,11 +9,14 @@ import $ from 'jquery';
   styleUrls: ['./parallax.component.scss']
 })
 export class ParallaxComponent implements OnInit {
+  private platformId = inject(PLATFORM_ID);
 
   public showScrollLink = false;
 
   ngOnInit() {
-    this.updateScrollLinkVisibility();
+    if (isPlatformBrowser(this.platformId)) {
+      this.updateScrollLinkVisibility();
+    }
   }
 
   @HostListener('window:scroll', [])
