@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 
 import { SeoService } from '../seo.service';
+import { ContactFormComponent } from '../contact-form/contact-form.component';
 
 @Component({
   selector: 'app-ticket-page',
+  imports: [ContactFormComponent],
   templateUrl: './ticket-page.component.html',
   styleUrls: ['./ticket-page.component.scss']
 })
 export class TicketPageComponent implements OnInit {
-
-  constructor(private seo: SeoService) { }
+  private seo = inject(SeoService);
 
   ngOnInit() {
     this.seo.update({

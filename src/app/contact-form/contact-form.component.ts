@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
 import { ContactService } from '../contact.service';
 
 enum Status {
@@ -9,10 +11,12 @@ enum Status {
 
 @Component({
   selector: 'app-contact-form',
+  imports: [FormsModule],
   templateUrl: './contact-form.component.html',
   styleUrls: ['./contact-form.component.scss']
 })
-export class ContactFormComponent implements OnInit {
+export class ContactFormComponent {
+  private mailService = inject(ContactService);
 
   name: string;
   email: string;
@@ -20,12 +24,6 @@ export class ContactFormComponent implements OnInit {
   content: string;
   status: Status = Status.NoAction;
   loading = false;
-
-  constructor(private mailService: ContactService) {
-  }
-
-  ngOnInit() {
-  }
 
   onSubmit(contactForm) {
     if (contactForm.valid) {

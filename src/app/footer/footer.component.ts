@@ -1,6 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 
-import * as $ from 'jquery';
+import $ from 'jquery';
 
 @Component({
   selector: 'app-footer',
@@ -11,9 +11,6 @@ export class FooterComponent implements OnInit {
 
   public currentYear = new Date().getFullYear();
   public showScrollLink = false;
-
-  constructor() {
-  }
 
   ngOnInit() {
     this.updateScrollLinkVisibility();

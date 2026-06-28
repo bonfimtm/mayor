@@ -2,7 +2,9 @@
   <p>
     &copy; <span [textContent]="currentYear"></span>&nbsp;<a href="https://bonfimtm.com" target="_blank">Thiago Bonfim</a>
   </p>
-  <div class="scroll-up-link" *ngIf="showScrollLink">
-    <i class="fa fa-3x fa-angle-double-up" aria-hidden="true" (click)="scrollSmoothly('#inicio')"></i>
-  </div>
+  @if (showScrollLink) {
+    <div class="scroll-up-link">
+      <i class="fa fa-3x fa-angle-double-up" aria-hidden="true" (click)="scrollSmoothly('#inicio')"></i>
+    </div>
+  }
 </footer>

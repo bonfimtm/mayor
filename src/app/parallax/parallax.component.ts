@@ -1,6 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 
-import * as $ from 'jquery';
+import $ from 'jquery';
 
 @Component({
   selector: 'app-parallax',
@@ -10,9 +10,6 @@ import * as $ from 'jquery';
 export class ParallaxComponent implements OnInit {
 
   public showScrollLink = false;
-
-  constructor() {
-  }
 
   ngOnInit() {
     this.updateScrollLinkVisibility();

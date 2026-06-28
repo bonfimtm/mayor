@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Title, Meta } from '@angular/platform-browser';
 
@@ -20,15 +20,13 @@ export interface SeoData {
  */
 @Injectable({ providedIn: 'root' })
 export class SeoService {
+  private title = inject(Title);
+  private meta = inject(Meta);
+  private doc = inject<Document>(DOCUMENT);
+
   private readonly baseUrl = 'https://neygutemberg.com.br';
   private readonly siteName = 'Ney Gutemberg Maia C. Bonfim';
   private readonly defaultImage = '/assets/images/photo1.jpg';
-
-  constructor(
-    private title: Title,
-    private meta: Meta,
-    @Inject(DOCUMENT) private doc: Document,
-  ) {}
 
   update(data: SeoData): void {
     const url = this.baseUrl + (data.path === '/' ? '' : data.path);

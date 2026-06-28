@@ -1,18 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
-import * as $ from 'jquery';
+import $ from 'jquery';
 
 @Component({
   selector: 'app-navbar',
+  imports: [RouterLink],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
+export class NavbarComponent {
 
   collapse() {
     $('#appNavbar').removeClass('show');

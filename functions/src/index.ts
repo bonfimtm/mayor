@@ -1,86 +1,95 @@
-import * as admin from 'firebase-admin';
-import * as functions from 'firebase-functions';
+import { initializeApp } from 'firebase-admin/app';
+import { getFirestore } from 'firebase-admin/firestore';
+import { onCall, CallableRequest } from 'firebase-functions/v2/https';
+import { defineSecret, defineString } from 'firebase-functions/params';
+import * as logger from 'firebase-functions/logger';
 import { createTransport } from 'nodemailer';
 
 interface ContactMessage {
-    name: string,
-    email: string,
-    subject: string,
-    content: string,
-};
-
-// Configure the email transport using the default SMTP transport and a GMail account.
-const gmailEmail = functions.config().gmail.email;
-const gmailPassword = functions.config().gmail.password;
-const mailTransport = createTransport({
-    service: 'gmail',
-    auth: {
-        user: gmailEmail,
-        pass: gmailPassword,
-    },
-});
-const recipients = functions.config().sitecontact.recipients;
-
-admin.initializeApp();
-
-export const onCallSendContactMessage = functions.https.onCall(async (data: ContactMessage, _): Promise<any> => {
-    console.log('Contact message data', data);
-    return saveMessage(data)
-        .then(() => sendContactEmail(data))
-        .then(() => { return { success: true } })
-        .catch(() => { return { success: false } });
-});
-
-function saveMessage(contactMessage: ContactMessage): Promise<any> {
-
-    const { name, email, subject, content } = contactMessage;
-
-    // The contact message text is required
-    if (!name || !email || !subject || !content) {
-        return Promise.reject("Missing required fields");
-    }
-
-    // Saving the new contact message
-    return admin.firestore().collection('/messages')
-        .add({
-            name: name,
-            email: email,
-            subject: subject,
-            content: content,
-            createdAt: new Date(),
-        })
-        .then(() => console.log(`Message from ${name} (${email}) was saved`))
-        .catch((error: any) => console.error('There was an error while saving the message:', error));
+  name: string;
+  email: string;
+  subject: string;
+  content: string;
 }
 
-// Sends contact message via email
-function sendContactEmail(contactMessage: ContactMessage): Promise<any> {
+// Configuration provided at deploy time via secrets / params (replaces the
+// deprecated `functions.config()` API). Set them with:
+//   firebase functions:secrets:set GMAIL_EMAIL
+//   firebase functions:secrets:set GMAIL_PASSWORD
+//   firebase deploy --only functions  (you will be prompted for SITECONTACT_RECIPIENTS)
+const gmailEmail = defineSecret('GMAIL_EMAIL');
+const gmailPassword = defineSecret('GMAIL_PASSWORD');
+const recipients = defineString('SITECONTACT_RECIPIENTS');
 
-    const { name, email, subject, content } = contactMessage;
+initializeApp();
 
-    const emailMessage = {
-        from: '"neygutemberg.com.br" <noreply@firebase.com>',
-        to: recipients,
-        subject: 'Você recebeu uma mensagem pelo site :)',
-        text: `
-            A seguinte mensagem foi enviada através do seu web site.
+export const onCallSendContactMessage = onCall(
+  { secrets: [gmailEmail, gmailPassword] },
+  async (request: CallableRequest<ContactMessage>): Promise<{ success: boolean }> => {
+    const data = request.data;
+    logger.info('Contact message data', data);
+    try {
+      await saveMessage(data);
+      await sendContactEmail(data);
+      return { success: true };
+    } catch {
+      return { success: false };
+    }
+  },
+);
 
-            Nome:
-            ${name}
+async function saveMessage(contactMessage: ContactMessage): Promise<void> {
+  const { name, email, subject, content } = contactMessage;
 
-            E-mail:
-            ${email}
+  if (!name || !email || !subject || !content) {
+    throw new Error('Missing required fields');
+  }
 
-            Assunto:
-            ${subject}
+  await getFirestore()
+    .collection('messages')
+    .add({
+      name,
+      email,
+      subject,
+      content,
+      createdAt: new Date(),
+    });
+  logger.info(`Message from ${name} (${email}) was saved`);
+}
 
-            Mensagem:
-            ${content}
+async function sendContactEmail(contactMessage: ContactMessage): Promise<void> {
+  const { name, email, subject, content } = contactMessage;
 
-      `.split('\n').map(line => line.trim()).join('\n'),
-    };
+  const mailTransport = createTransport({
+    service: 'gmail',
+    auth: {
+      user: gmailEmail.value(),
+      pass: gmailPassword.value(),
+    },
+  });
 
-    return mailTransport.sendMail(emailMessage)
-        .then(() => console.log(`Message from ${name} (${email}) was sent via email`))
-        .catch((error: any) => console.error('There was an error while sending the email:', error));
-};
+  const emailMessage = {
+    from: '"neygutemberg.com.br" <noreply@firebase.com>',
+    to: recipients.value(),
+    subject: 'Você recebeu uma mensagem pelo site :)',
+    text: `
+      A seguinte mensagem foi enviada através do seu web site.
+
+      Nome:
+      ${name}
+
+      E-mail:
+      ${email}
+
+      Assunto:
+      ${subject}
+
+      Mensagem:
+      ${content}
+
+    `.split('\n').map(line => line.trim()).join('\n'),
+  };
+
+  await mailTransport.sendMail(emailMessage);
+  logger.info(`Message from ${name} (${email}) was sent via email`);
+}

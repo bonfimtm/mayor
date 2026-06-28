@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { practiceAreas, PracticeArea } from './practice-areas.data';
 
@@ -7,15 +7,10 @@ import { practiceAreas, PracticeArea } from './practice-areas.data';
   templateUrl: './practice-areas.component.html',
   styleUrls: ['./practice-areas.component.scss']
 })
-export class PracticeAreasComponent implements OnInit {
+export class PracticeAreasComponent {
 
   public areas: PracticeArea[] = practiceAreas;
   public selected = 0;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
 
   select(index: number) {
     this.selected = index;
