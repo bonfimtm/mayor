@@ -3,6 +3,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { SeoService } from '../seo.service';
 import { ParallaxComponent } from '../parallax/parallax.component';
 import { AboutComponent } from '../about/about.component';
+import { TeamComponent } from '../team/team.component';
 import { PracticeAreasComponent } from '../practice-areas/practice-areas.component';
 import { CarouselComponent } from '../carousel/carousel.component';
 import { FaqComponent } from '../faq/faq.component';
@@ -14,6 +15,7 @@ import { ContactComponent } from '../contact/contact.component';
   imports: [
     ParallaxComponent,
     AboutComponent,
+    TeamComponent,
     PracticeAreasComponent,
     CarouselComponent,
     FaqComponent,

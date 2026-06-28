@@ -1,0 +1,29 @@
+<section id="equipe" class="mb-5">
+
+  <div class="container">
+    <h2 class="display-4 text-center">Equipe</h2>
+    <div class="nb-separator"></div>
+
+    <div class="row mt-4">
+      @for (member of members; track member.name) {
+        <div class="col-12 col-md-4 mb-4">
+          <div class="card team-card h-100 border-0">
+            <picture>
+              <source type="image/webp" srcset="/assets/images/{{ member.image }}.webp" />
+              <source type="image/jpeg" srcset="/assets/images/{{ member.image }}.jpg" />
+              <img class="card-img-top team-photo" src="/assets/images/{{ member.image }}.jpg" [alt]="member.alt">
+            </picture>
+            <div class="card-body px-0">
+              <h3 class="h5 mb-1" [innerText]="member.name"></h3>
+              <p class="mb-1">{{ member.role }} <span class="text-muted">— {{ member.oab }}</span></p>
+              @for (paragraph of member.paragraphs; track paragraph) {
+                <p class="text-justify" [innerText]="paragraph"></p>
+              }
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+
+  </div>
+</section>
