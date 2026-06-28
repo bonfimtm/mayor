@@ -60,4 +60,19 @@ export class SeoService {
     }
     link.setAttribute('href', url);
   }
+
+  /**
+   * Inserts (or updates) a JSON-LD structured-data script in <head>, keyed by id
+   * so repeated calls during prerender + client hydration don't duplicate it.
+   */
+  setJsonLd(id: string, data: unknown): void {
+    let script = this.doc.getElementById(id) as HTMLScriptElement | null;
+    if (!script) {
+      script = this.doc.createElement('script');
+      script.type = 'application/ld+json';
+      script.id = id;
+      this.doc.head.appendChild(script);
+    }
+    script.textContent = JSON.stringify(data);
+  }
 }
