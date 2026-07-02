@@ -2,10 +2,11 @@ import { Component, OnInit, inject } from '@angular/core';
 
 import { SeoService } from '../seo.service';
 import { ContactFormComponent } from '../contact-form/contact-form.component';
+import { TrackWhatsappDirective } from '../track-whatsapp.directive';
 
 @Component({
   selector: 'app-ticket-page',
-  imports: [ContactFormComponent],
+  imports: [ContactFormComponent, TrackWhatsappDirective],
   templateUrl: './ticket-page.component.html',
   styleUrls: ['./ticket-page.component.scss']
 })
