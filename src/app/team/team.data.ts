@@ -8,21 +8,6 @@ export interface TeamMember {
 }
 
 export const teamMembers: TeamMember[] = [{
-    name: 'Lara Kethllin Maia Damasceno',
-    role: 'Advogada',
-    oab: 'OAB/BA 75.169',
-    image: 'lara',
-    alt: 'Lara Kethllin Maia Damasceno, advogada da NB Advocacia',
-    paragraphs: [
-        `Advogada inscrita na Ordem dos Advogados do Brasil, Seccional Bahia (OAB/BA nº 75.169),
-        graduada em Direito pela Universidade Católica do Salvador (UCSAL).`,
-        `Pós-graduada em Direito Civil e Processo Civil, com especialização em Direito de Família, atua
-        com foco na orientação e defesa de clientes em questões familiares e cíveis, conciliando rigor
-        técnico e atendimento humanizado.`,
-        `Comprometida com a ética profissional e com a busca de soluções jurídicas eficazes, dedica-se a
-        acompanhar cada caso de forma personalizada, zelando pelos interesses e direitos de seus clientes.`
-    ]
-}, {
     name: 'Breno Cruz',
     role: 'Advogado',
     oab: 'OAB/BA 86.635',

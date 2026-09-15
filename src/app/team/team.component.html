@@ -4,9 +4,9 @@
     <h2 class="display-4 text-center">Equipe</h2>
     <div class="nb-separator"></div>
 
-    <div class="row mt-4">
+    <div class="row mt-6">
       @for (member of members; track member.name) {
-        <div class="col-12 col-md-4 mb-4">
+        <div class="col-12 col-md-6 mb-6">
           <div class="card team-card h-100 border-0">
             <picture>
               <source type="image/webp" srcset="/assets/images/{{ member.image }}.webp" />
